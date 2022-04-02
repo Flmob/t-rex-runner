@@ -62,8 +62,10 @@ body {
   height: 150px;
 
   display: flex;
+  justify-content: flex-end;
+  -webkit-justify-content: flex-end;
   align-items: center;
-  justify-content: end;
+  -webkit-align-items: center;
 }
 
 .offline .start-message > * {
