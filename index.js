@@ -144,6 +144,7 @@
     Runner.classes = {
         CANVAS: 'runner-canvas',
         CONTAINER: 'runner-container',
+        START_MESSAGE: 'start-message',
         CRASHED: 'crashed',
         ICON: 'icon-offline',
         INVERTED: 'inverted',
@@ -358,6 +359,14 @@
             this.containerEl = document.createElement('div');
             this.containerEl.className = Runner.classes.CONTAINER;
 
+            this.startMessageEl = document.createElement('div');
+            this.startMessageEl.className = Runner.classes.START_MESSAGE;
+            this.startMessageEl.style.width = this.dimensions.WIDTH + 'px';
+
+            const startMessageSpan = document.createElement('div');
+            startMessageSpan.innerHTML = 'Press "Space" or touch screen to start';
+            this.startMessageEl.appendChild(startMessageSpan);
+
             // Player canvas container.
             this.canvas = createCanvas(this.containerEl, this.dimensions.WIDTH,
                 this.dimensions.HEIGHT, Runner.classes.PLAYER);
@@ -378,6 +387,7 @@
             // Draw t-rex
             this.tRex = new Trex(this.canvas, this.spriteDef.TREX);
 
+            this.outerContainerEl.appendChild(this.startMessageEl);
             this.outerContainerEl.appendChild(this.containerEl);
 
             if (IS_MOBILE) {
@@ -422,6 +432,10 @@
                 boxStyles.paddingLeft.length - 2));
 
             this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
+            
+            if(this.startMessageEl) {
+                this.startMessageEl.style.width = this.dimensions.WIDTH + 'px';
+            }
 
             // Redraw the elements back onto the canvas.
             if (this.canvas) {
@@ -513,7 +527,9 @@
         },
 
         clearCanvas: function () {
-            this.canvasCtx.clearRect(0, 0, this.dimensions.WIDTH,
+            this.canvasCtx.fillStyle = "white";
+
+            this.canvasCtx.fillRect(0, 0, this.dimensions.WIDTH,
                 this.dimensions.HEIGHT);
         },
 
