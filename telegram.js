@@ -2,6 +2,8 @@ const url = new URL(location.href);
 const params = Object.fromEntries(url.searchParams);
 
 const updateGameScore = (score) => {
+  const message = `You've lost! Your score is ${score}.`;
+
   return fetch("/setscore", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
