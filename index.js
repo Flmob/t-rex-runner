@@ -808,7 +808,7 @@
             if (this.distanceRan > this.highestScore) {
                 this.highestScore = Math.ceil(this.distanceRan);
                 this.distanceMeter.setHighScore(this.highestScore);
-                updateGameScore(this.highestScore);
+                updateGameScore(+this.highScore);
             }
 
             // Reset the time clock.
