@@ -808,7 +808,7 @@
             if (this.distanceRan > this.highestScore) {
                 this.highestScore = Math.ceil(this.distanceRan);
                 this.distanceMeter.setHighScore(this.highestScore);
-                updateGameScore(+this.highScore);
+                updateGameScore(this.distanceMeter.getActualDistance(this.highestScore));
             }
 
             // Reset the time clock.
@@ -2106,10 +2106,12 @@
          */
         setHighScore: function (distance) {
             distance = this.getActualDistance(distance);
+            console.log({distance});
             var highScoreStr = (this.defaultString +
                 distance).substr(-this.maxScoreUnits);
 
             this.highScore = ['10', '11', ''].concat(highScoreStr.split(''));
+            console.log(this.highScore)
         },
 
         /**
