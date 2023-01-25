@@ -1,3 +1,10 @@
+let loadingIndicator;
+
+const setLoadingState = (isLoading = false) => {
+  if (isLoading) loadingIndicator.classList.remove("hidden");
+  else loadingIndicator.classList.add("hidden");
+};
+
 const url = new URL(location.href);
 const params = Object.fromEntries(url.searchParams);
 
@@ -6,6 +13,7 @@ const updateGameScore = (score) => {
 
   if (!score) return;
 
+  setLoadingState(true);
   return fetch("/setscore", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -16,5 +24,12 @@ const updateGameScore = (score) => {
     })
     .catch((err) => {
       console.log(`${message}\nSorry, couldn't save your new score`);
+    })
+    .finally(() => {
+      setLoadingState(false);
     });
+};
+
+window.onload = () => {
+  loadingIndicator = document.querySelector(".loading");
 };
