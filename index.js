@@ -2106,12 +2106,10 @@
          */
         setHighScore: function (distance) {
             distance = this.getActualDistance(distance);
-            console.log({distance});
             var highScoreStr = (this.defaultString +
                 distance).substr(-this.maxScoreUnits);
 
             this.highScore = ['10', '11', ''].concat(highScoreStr.split(''));
-            console.log(this.highScore)
         },
 
         /**
